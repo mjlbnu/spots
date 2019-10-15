@@ -1,5 +1,12 @@
 const User = require('../models/User');
 const Spot = require('../models/Spot');
+const cloudinary = require('cloudinary').v2;
+
+cloudinary.config({
+  cloud_name: 'mjlbnu',
+  api_key: '774422371536597',
+  api_secret: '4y-EEYHYRG2GQn5EKrteQzyFAyM',
+});
 
 module.exports = {
   async index(request, response) {
@@ -28,6 +35,21 @@ module.exports = {
       techs: techs.split(',').map(tech => tech.trim()),
       price,
     });
+
+    const path = request.file.path;
+    cloudinary.uploader.upload(
+      path,
+      { public_id: `spots/${spot.thumbnail}` },
+      function(err, image) {
+        if (err) return response.send(err);
+        console.log('file uploaded to Cloudinary');
+        // remove file from server
+        //const fs = require('fs')
+        //fs.unlinkSync(path)
+        // return image details
+        //res.json(image)
+      }
+    );
 
     return response.json(spot);
   },

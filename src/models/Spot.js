@@ -19,8 +19,8 @@ const SpotSchema = new mongoose.Schema(
 );
 
 SpotSchema.virtual('thumbnail_url').get(function() {
-  return `https://thawing-savannah-09389.herokuapp.com/files/${this.thumbnail}`;
-  //return `http://localhost:3333/files/${this.thumbnail}`;
+  //return `https://thawing-savannah-09389.herokuapp.com/files/${this.thumbnail}`;
+  return `http://localhost:3333/files/${this.thumbnail}`;
 });
 
 module.exports = mongoose.model('Spot', SpotSchema);
