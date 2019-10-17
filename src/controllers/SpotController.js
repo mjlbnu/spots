@@ -30,38 +30,27 @@ module.exports = {
 
     // upload image to Cloudinary
     const path = request.file.path;
-    var secure_url = '';
+
     cloudinary.uploader.upload(
       path,
       { public_id: `spots/${filename}` },
-      function(err, image) {
+      async function(err, image) {
         if (err) return response.send(err);
         console.log('file uploaded to Cloudinary');
-        //console.log(image.secure_url);
-        secure_url = image.secure_url;
-        console.log('secure_url>');
-        console.log(secure_url);
-        /* remove file from server
-        const fs = require('fs')
-        fs.unlinkSync(path)
-         return image details
-        res.json(image)*/
+
+        // remove file from server
+        const fs = require('fs');
+        fs.unlinkSync(path);
+
+        const spot = await Spot.create({
+          user: user_id,
+          thumbnail: image.url,
+          company,
+          techs: techs.split(',').map(tech => tech.trim()),
+          price,
+        });
+        return response.json(spot);
       }
     );
-
-    console.log('secure_url:');
-    console.log(secure_url);
-    secure_url =
-      'https://res.cloudinary.com/mjlbnu/image/upload/v1571193590/spots/dog3-1571193588734.jpg.jpg';
-
-    const spot = await Spot.create({
-      user: user_id,
-      thumbnail: secure_url,
-      company,
-      techs: techs.split(',').map(tech => tech.trim()),
-      price,
-    });
-
-    return response.json(spot);
   },
 };
