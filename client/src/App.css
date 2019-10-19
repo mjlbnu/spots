@@ -17,6 +17,9 @@ body {
   background: #000 url('./assets/background.jpg') no-repeat;
   background-size: cover;
   -webkit-font-smoothing: antialiased !important;
+  background-position: center center;
+  background-attachment: fixed;
+  height: 90vh;
 }
 
 body,
@@ -27,8 +30,9 @@ button {
 }
 
 .container {
-  margin: 80px auto 0;
-  max-width: 95%;
+  margin: 20px auto 20px;
+  /*max-width: 95%;*/
+  max-width: 960px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -38,9 +42,9 @@ button {
 .content {
   width: 100%;
   background: #fff;
-  margin-top: 50px;
+  margin-top: 20px;
   border-radius: 4px;
-  padding: 30px;
+  padding: 0px;
 }
 
 .content > p {

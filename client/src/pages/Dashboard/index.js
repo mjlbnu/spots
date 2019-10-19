@@ -21,13 +21,15 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <>
+    <div className="wrapper">
     <ul className="spot-list">
     {spots.map(spot => (
-      <li key={spot._id}>
-        <header style={{ backgroundImage: `url(${spot.thumbnail})` }} />
-        <strong>{spot.company}</strong>
-        <span>{spot.price ? `R$${spot.price}/dia` : 'GRATUITO'}</span>
+      <li className="tile" key={spot._id} style={{ backgroundImage: `url(${spot.thumbnail})` }}>
+        <div className="tile__info">
+          <h3 className="tile__title"><strong>{spot.company}</strong></h3>
+          <p className="tile__description">{spot.price ? `R$${spot.price}/dia` : 'GRATUITO'}</p>
+        </div>
+        <a href="/new" className="tile__button">Read More +</a>
       </li>
     ))}
     </ul>
@@ -35,6 +37,6 @@ export default function Dashboard() {
     <Link to="/new">
       <button className="btn">Cadastrar novo spot</button>
     </Link>
-    </>
+    </div>
   )
 }

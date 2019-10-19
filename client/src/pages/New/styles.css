@@ -21,3 +21,7 @@ label#thumbnail.has-thumbnail {
 label#thumbnail.has-thumbnail img {
   display: none;
 }
+
+form {
+  padding: 30px;
+}
